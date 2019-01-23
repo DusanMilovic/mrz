@@ -1,0 +1,11 @@
+gpg je alat koji obezbeđuje sigurnu komunikaciju i skladištenje podataka. On omogućava kreiranje digitalnog potpisa i šifrovanje podataka.
+
+a) gpg -sear mi16888 /backup/dat1 - šifrovanje javnim ključem korisnika mi16888 i potpisivanje šifrata privatnim ključem
+
+značenje agrumenata:
+	1. s - sign(potpisivanje) - potpisivanje šifrata privatnim ključem izbegava se rizik da se korisnik koji je datoteku šifrovao
+	2. e - encrypt(šifrovanje)
+	3. a - kreiranje ASCII zaštićenog izlaza
+	4. r - šifrovanje javnim ključem korisnika mi16888 
+
+b) Pre nego što zada komandu korisnik mora da napravi javni i privatni ključ (komandom gpg --gen-key), a nakon šifrovanja može da obriše svoj originalni fajl (opcijom shred) kome neće moći da se pristupi na disku. Javni ključ se mora distribuirati korisnicima sa kojima je potrebno ostvariti šifrovani komunikacioni kanal.
