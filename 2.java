@@ -1,32 +1,37 @@
-import javax.net.SocketFactory;
-import javax.net.ssl.SSLSocketFactory;
-import java.net.*;
-import java.io.*;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 
-public class Main {
+public class Zadatak2 {
 
-    private final static int PORT = 0;
+	public static void main(String[] args) throws SocketException {
 
-    static String s="Домовина се брани лепотом, и чашћу и знањем. Домовина се брани животом и лепим васпитањем. Домовина се брани цветом, И пчелом на цвету, Маком и сунцокретом,И птицом у лету.";
+		String s = "Домовина се брани лепотом, и чашћу и знањем. Домовина се брани животом и лепим васпитањем. Домовина се брани цветом, И пчелом на цвету, Маком и сунцокретом,И птицом у лету.";
+		
+		try {
+			byte[] data = s.getBytes("UTF-8");
+			try (DatagramSocket socket = new DatagramSocket(0)){
+				
+				InetAddress ia = InetAddress.getByName("192.168.8.255");
+				int port = 7;
+				DatagramPacket theOutput = new DatagramPacket(data, data.length, ia, port);
+				socket.send(theOutput);
+			}
+			catch(UnknownHostException e){
+				System.err.println("Unkown host: " + e);
+			}
+			catch (IOException ex) {
+				System.err.println("Cant bind to socket.\n: " + ex);
+			}
+		} catch (UnsupportedEncodingException e1) {
+			System.out.println("Unsuported coding.\n" + e1);
+		}
 
-    public static void main(String[] args) {
 
-        try (DatagramSocket socket = new DatagramSocket(0)) {
-            socket.setSoTimeout(10000);
-            byte[] data=s.getBytes("UTF-8");
-            InetAddress ia = InetAddress.getByName("255.255.255.255");
-            DatagramPacket dp = new DatagramPacket(data, data.length, ia , PORT);
-
-            socket.send(dp);
-
-
-        }catch(UnknownHostException e){
-        System.err.println(e);
-    }
-        catch ( IOException | RuntimeException ex) {
-            ex.printStackTrace();
-            System.out.println(" ");
-        }
-    }
+	}
 
 }
