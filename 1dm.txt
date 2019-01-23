@@ -1,0 +1,8 @@
+a)  command gpg -s (signature) => samo za poptpis sluzi
+    command gpg -e (encrypt) => sluzi za enkriptovanje, i koristi se zajedno sa -s
+    command gpg -a (armor) => pravi ascii output
+    cpmmand gpg -r (recipient name) => zbog njega se prosledjuje name ciji se id sifruje, ako se ne prosledi ova opcija onda gpg ce zatraziti id da se unese ukoliko ne postoji neki default setovan id
+    
+b) Pre zadavanja komande mora da napravim public/private key sto moze da uradi komandom gpg --gen-key a nakon sifrovanja moze da obrise svoj originalni fajl (sa opcijom shred) kome nece moci da se pristupi na disku
+c) 
+d) 
