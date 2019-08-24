@@ -1,4 +1,12 @@
-publi class datagram {
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+
+public class datagram {
 	public static void main(String[] args) throw SocketException {
 		String s = "Домовина се брани лепотом, и чашћу и знањем. Домовина се брани животом и лепим васпитањем."
 		try {
