@@ -1,0 +1,66 @@
+package test1;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+
+public class Zadatak1 {
+
+	public static void main(String[] args) {
+		
+		String host = args[0];
+		
+		if(args.length > 1)
+		{
+			for (int i = 1; i < args.length; i++) {
+				try 
+				{
+					BufferedInputStream input = new BufferedInputStream(new URL(host + args[i]).openStream());
+					BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(args[i]));
+					byte[] buffer = new byte[512];
+					int bytesRead = input.read(buffer);
+					while (bytesRead != -1)
+					{
+						output.write(buffer, 0, bytesRead);
+						bytesRead = input.read(buffer);
+					}
+					input.close();
+					output.close();
+					System.out.println("OK");
+				}
+				catch (IOException e) 
+				{
+					System.out.println("Trazeni file ne postoji!");
+				}
+			}
+		}
+		else
+		{
+			try 
+			{
+				BufferedReader input = new BufferedReader(new InputStreamReader(new URL(host + "index.html").openStream()));
+				BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("index.html"), "UTF8"));
+				char[] buffer = new char[512];
+				int charactersRead = input.read(buffer);
+				while (charactersRead != -1)
+				{
+					output.write(buffer, 0, charactersRead);
+					charactersRead = input.read(buffer);
+				}
+				input.close();
+				output.close();
+				System.out.println("OK");
+			}
+			catch (IOException e) 
+			{
+				System.out.println("Trazeni file ne postoji!");
+			}
+		}
+	}
+}
